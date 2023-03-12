@@ -1,7 +1,7 @@
 package es.manudev.manuelgutierrezdemoapplication
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class DemoApp : Application(){
-
-}
+@HiltAndroidApp
+class DemoApp : Application()
