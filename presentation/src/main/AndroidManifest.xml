@@ -9,7 +9,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name="es.manudev.presentation.MainActivity"
+            android:name="es.manudev.presentation.ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
