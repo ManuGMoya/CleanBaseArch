@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import es.manudev.presentation.databinding.FirstTestFragmentBinding
 
-
 @AndroidEntryPoint
 class FirstTestFragment : Fragment() {
 
@@ -36,7 +35,11 @@ class FirstTestFragment : Fragment() {
     private fun setListeners() {
         with(binding) {
             btnNavigate.setOnClickListener { view ->
-                viewModel.navigateToSecondFragment(view)
+                // TEST NAVIGATION
+                // viewModel.navigateToSecondFragment(view)
+
+                // TEST RETROFIT
+                viewModel.testRetrofit()
             }
         }
     }
