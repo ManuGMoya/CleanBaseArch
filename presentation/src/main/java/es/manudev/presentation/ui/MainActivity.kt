@@ -1,8 +1,9 @@
-package es.manudev.presentation
+package es.manudev.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import es.manudev.presentation.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
