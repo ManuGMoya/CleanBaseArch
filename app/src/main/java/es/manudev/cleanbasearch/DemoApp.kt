@@ -1,4 +1,4 @@
-package es.manudev.manuelgutierrezdemoapplication
+package es.manudev.cleanbasearch
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

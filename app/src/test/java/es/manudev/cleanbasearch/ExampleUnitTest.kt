@@ -1,4 +1,4 @@
-package es.manudev.manuelgutierrezdemoapplication
+package es.manudev.cleanbasearch
 
 import org.junit.Test
 
