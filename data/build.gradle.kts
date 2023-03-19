@@ -1,3 +1,18 @@
+import com.manudev.cleanbasearch.gradle.AndroidSdk.COMPILE_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.MIN_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.TARGET_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.Constants.KOTLIN_JVM_TARGET
+import com.manudev.cleanbasearch.gradle.Libraries.appCompat
+import com.manudev.cleanbasearch.gradle.Libraries.espresso
+import com.manudev.cleanbasearch.gradle.Libraries.gson
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_dependency
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_kapt
+import com.manudev.cleanbasearch.gradle.Libraries.junit4
+import com.manudev.cleanbasearch.gradle.Libraries.junit_impl
+import com.manudev.cleanbasearch.gradle.Libraries.ktxCore
+import com.manudev.cleanbasearch.gradle.Libraries.material
+import com.manudev.cleanbasearch.gradle.Libraries.retrofit
+
 plugins {
     id("android.lib.plugin")
     id("dagger.hilt.android.plugin")
@@ -6,11 +21,11 @@ plugins {
 
 android {
     namespace = "es.manudev.data"
-    compileSdk = 33
+    compileSdk = COMPILE_ANDROID_VERSION
 
     defaultConfig {
-        minSdk = 28
-        targetSdk = 33
+        minSdk = MIN_ANDROID_VERSION
+        targetSdk = TARGET_ANDROID_VERSION
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -27,30 +42,29 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = KOTLIN_JVM_TARGET
     }
 }
 
 dependencies {
     implementation(project(":domain"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(ktxCore)
+    implementation(appCompat)
+    implementation(material)
 
-    // DAGGER HILT
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    testImplementation(junit4)
+    androidTestImplementation(junit_impl)
+    androidTestImplementation(espresso)
 
-    // RETROFIT
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(retrofit)
+    implementation(gson)
+
+    implementation(hilt_dependency)
+    kapt(hilt_kapt)
 }

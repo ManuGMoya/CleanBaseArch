@@ -1,6 +1,23 @@
+import com.manudev.cleanbasearch.gradle.AndroidSdk.COMPILE_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.MIN_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.TARGET_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.Constants.KOTLIN_JVM_TARGET
+import com.manudev.cleanbasearch.gradle.Libraries.appCompat
+import com.manudev.cleanbasearch.gradle.Libraries.coroutines
+import com.manudev.cleanbasearch.gradle.Libraries.espresso
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_dependency
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_kapt
+import com.manudev.cleanbasearch.gradle.Libraries.junit4
+import com.manudev.cleanbasearch.gradle.Libraries.junit_impl
+import com.manudev.cleanbasearch.gradle.Libraries.ktxCore
+import com.manudev.cleanbasearch.gradle.Libraries.livedate
+import com.manudev.cleanbasearch.gradle.Libraries.material
+import com.manudev.cleanbasearch.gradle.Libraries.navigation_fragment
+import com.manudev.cleanbasearch.gradle.Libraries.navigation_ui
+import com.manudev.cleanbasearch.gradle.Libraries.viewmodel_lifecycle
+
 plugins {
     id("android.lib.plugin")
-    id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("kapt")
@@ -8,11 +25,11 @@ plugins {
 
 android {
     namespace = "es.manudev.presentation"
-    compileSdk = 33
+    compileSdk = COMPILE_ANDROID_VERSION
 
     defaultConfig {
-        minSdk = 28
-        targetSdk = 33
+        minSdk = MIN_ANDROID_VERSION
+        targetSdk = TARGET_ANDROID_VERSION
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -21,17 +38,20 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = KOTLIN_JVM_TARGET
     }
 
     buildFeatures {
@@ -42,28 +62,21 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    // DEFAULTS
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(ktxCore)
+    implementation(appCompat)
+    implementation(material)
 
-    // COROUTINES
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    testImplementation(junit4)
+    androidTestImplementation(junit_impl)
+    androidTestImplementation(espresso)
 
-    // LIFECYCLE
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    // Livedata
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation(coroutines)
+    implementation(viewmodel_lifecycle)
+    implementation(livedate)
 
-    // DAGGER HILT
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation(navigation_fragment)
+    implementation(navigation_ui)
 
-    // NAVIGATION
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation(hilt_dependency)
+    kapt(hilt_kapt)
 }

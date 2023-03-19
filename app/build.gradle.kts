@@ -1,19 +1,38 @@
+import com.manudev.cleanbasearch.gradle.AndroidSdk.COMPILE_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.MIN_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.TARGET_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.Constants.APPLICATION_ID
+import com.manudev.cleanbasearch.gradle.Constants.KOTLIN_JVM_TARGET
+import com.manudev.cleanbasearch.gradle.Constants.VERSION_CODE
+import com.manudev.cleanbasearch.gradle.Constants.VERSION_NAME
+import com.manudev.cleanbasearch.gradle.Libraries.appCompat
+import com.manudev.cleanbasearch.gradle.Libraries.constraintLayout
+import com.manudev.cleanbasearch.gradle.Libraries.espresso
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_dependency
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_kapt
+import com.manudev.cleanbasearch.gradle.Libraries.junit4
+import com.manudev.cleanbasearch.gradle.Libraries.junit_impl
+import com.manudev.cleanbasearch.gradle.Libraries.ktxCore
+import com.manudev.cleanbasearch.gradle.Libraries.material
+
 plugins {
     id("android.app.plugin")
     id("kotlin-android")
-    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    kotlin("kapt")
 }
 
 android {
-    compileSdk = 33
+    compileSdk = COMPILE_ANDROID_VERSION
 
     defaultConfig {
-        applicationId = "es.manudev.cleanbasearch"
-        minSdk = 28
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = APPLICATION_ID
+
+        minSdk = MIN_ANDROID_VERSION
+        targetSdk = TARGET_ANDROID_VERSION
+
+        versionName = VERSION_NAME
+        versionCode = VERSION_CODE
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,12 +48,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = KOTLIN_JVM_TARGET
     }
 }
 
@@ -43,14 +62,18 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(ktxCore)
+    implementation(appCompat)
+    implementation(material)
 
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    testImplementation(junit4)
+    androidTestImplementation(junit_impl)
+    androidTestImplementation(espresso)
+
+    implementation(constraintLayout)
+
+    implementation(hilt_dependency)
+    kapt(hilt_kapt)
+
+
 }

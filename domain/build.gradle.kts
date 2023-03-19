@@ -1,3 +1,10 @@
+import com.manudev.cleanbasearch.gradle.AndroidSdk.COMPILE_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.MIN_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.AndroidSdk.TARGET_ANDROID_VERSION
+import com.manudev.cleanbasearch.gradle.Constants.KOTLIN_JVM_TARGET
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_dependency
+import com.manudev.cleanbasearch.gradle.Libraries.hilt_kapt
+
 plugins {
     id("android.lib.plugin")
     id("dagger.hilt.android.plugin")
@@ -5,11 +12,12 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    namespace = "es.manudev.domain"
+    compileSdk = COMPILE_ANDROID_VERSION
 
     defaultConfig {
-        minSdk = 28
-        targetSdk = 33
+        minSdk = MIN_ANDROID_VERSION
+        targetSdk = TARGET_ANDROID_VERSION
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -17,24 +25,24 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = KOTLIN_JVM_TARGET
     }
-
-
 }
 
 dependencies {
-    // DAGGER HILT
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-android-compiler:2.41")
+    implementation(hilt_dependency)
+    kapt(hilt_kapt)
 }
