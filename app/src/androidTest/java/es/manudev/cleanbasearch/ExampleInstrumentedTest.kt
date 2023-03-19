@@ -1,4 +1,4 @@
-package es.manudev.manuelgutierrezdemoapplication
+package es.manudev.cleanbasearch
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
