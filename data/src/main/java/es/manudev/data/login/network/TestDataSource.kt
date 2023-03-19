@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class TestDataSource @Inject constructor(private val testApiClient: TestApiClient) {
 
-    suspend fun doTest(user: String, password: String): Boolean {
+    suspend fun doTest(): Boolean {
         return withContext(Dispatchers.IO) {
             val response = testApiClient.doTest()
             response.body()?.success ?: false

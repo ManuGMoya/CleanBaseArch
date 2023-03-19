@@ -6,7 +6,7 @@ import javax.inject.Inject
 class TestUseCase @Inject constructor(
     private val repository: ITestRepository
 ) {
-    suspend operator fun invoke(user: String, password: String): Boolean {
-        return repository.testCallRetrofit(user, password)
+    suspend operator fun invoke(): Boolean {
+        return repository.testCallRetrofit()
     }
 }

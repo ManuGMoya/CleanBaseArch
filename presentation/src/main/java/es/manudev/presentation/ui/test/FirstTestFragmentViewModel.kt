@@ -22,7 +22,7 @@ class FirstTestFragmentViewModel @Inject constructor(
 
     fun testRetrofit() {
         viewModelScope.launch {
-            val result = loginUseCase("test@mail.com", "MyPaw0rd")
+            val result = loginUseCase()
             if (result) {
                 Log.d("TEST", "RESULT OK")
             } else {
