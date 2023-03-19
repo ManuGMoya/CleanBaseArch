@@ -1,20 +1,5 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "ManuelGutierrezDemoApplication"
-
+rootProject.name = "CleanBaseArch"
 include(":app")
-include(":data")
 include(":domain")
+include(":data")
 include(":presentation")
