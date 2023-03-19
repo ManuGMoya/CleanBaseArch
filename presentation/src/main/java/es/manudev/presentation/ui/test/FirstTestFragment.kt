@@ -36,10 +36,10 @@ class FirstTestFragment : Fragment() {
         with(binding) {
             btnNavigate.setOnClickListener { view ->
                 // TEST NAVIGATION
-                // viewModel.navigateToSecondFragment(view)
+                viewModel.navigateToSecondFragment(view)
 
                 // TEST RETROFIT
-                viewModel.testRetrofit()
+             //   viewModel.testRetrofit()
             }
         }
     }

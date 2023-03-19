@@ -8,8 +8,8 @@ class TestRepository @Inject constructor(
     private val api: TestDataSource
 ) : ITestRepository {
 
-    override suspend fun testCallRetrofit(user: String, password: String): Boolean {
-        return api.doTest(user, password)
+    override suspend fun testCallRetrofit(): Boolean {
+        return api.doTest()
     }
 
 }
